@@ -1,10 +1,10 @@
-// SET UP
-// get weather API key and endpoints functioning (use insomnia)
-// use their geocoding API
-// the geocoder API will be able to get the parameters needed for the weather API
-
 // 1 function per fetch request pass responses between 
-
+var userForm = document.querySelector('#user-form');
+var cityInput = document.querySelector('#city');
+var previousSearches = document.querySelector('#previous-searches');
+var weatherLocation = document.querySelector('#weather-location');
+var currentWeatherEl = document.querySelector('current-weather-container');
+var fiveDayForecastEl = document.querySelector('#five-day-forecast-container');
 
 var getGeocode = function (cityName) {
     var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=e6aa9334d4eabc66f4fb68aff872a208';
