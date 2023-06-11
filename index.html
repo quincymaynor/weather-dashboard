@@ -20,15 +20,17 @@
   <main class="d-flex flex-wrap justify-space-between m-auto w-75">
     <div class="col-12 col-md-4">
 
+      <!-- input form with search button -->
       <div class="card mb-5 border border-3 border-primary rounded-3">
         <h3 class="card-header text-primary text-uppercase fw-bold">Search for a city</h3>
         <form id="user-form" class="card-body">
           <label class="form-label" for="city">City</label>
           <input name="city" id="city" type="text" autofocus="true" class="form-input w-100 mb-3 p-3 rounded-1"/>
-          <button type="submit" class="btn w-100 text-dark">Find city</button>
+          <button type="submit" id="submit" class="btn w-100 text-dark">Find city</button>
         </form>
       </div>
 
+      <!-- saved searches section -->
       <div class="card mb-5 border border-3 border-primary rounded-3">
         <h3 class="card-header text-primary text-uppercase fw-bold">Previous searches</h3>
         <div id="previous-searches" class="card-body btn-group-vertical">
@@ -40,9 +42,13 @@
     </div>
 
     <div class="col-12 col-md-8">
-      <h2 class="subtitle fw-bold">Showing the weather in: <span id="city-search-term"></span></h2>
+      <h2 class="subtitle fw-bold">Showing the weather in: <span id="weather-location"></span></h2>
+
+      <!-- display for today's forecast -->
       <div id="current-weather-container" class="list-group"></div>
-      <div id="5day-forecast-container" class="list-group"></div>
+
+      <!-- display for the 5-day forecast -->
+      <div id="five-day-forecast-container" class="list-group"></div>
     </div>
 
   </main>

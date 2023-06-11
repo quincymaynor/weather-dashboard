@@ -1,14 +1,18 @@
-/* :root {
+:root {
     --primary: #ccdad1;
     --secondary: #9caea9;
-    --tertiary: #788585;
+    --tertiary: #aef3f3;
     --light-dark: #6f6866;
     --dark: #38302e;
     --border-radius: 0.3rem;
-  } */
+  }
   
   * {
     box-sizing: border-box;
+  }
+
+  .icon-size {
+    width: 15%;
   }
 
   .btn:hover {
