@@ -11,6 +11,10 @@
     box-sizing: border-box;
   }
 
+  .icon-size {
+    width: 15%;
+  }
+
   .btn:hover {
     color: var(--primary);
     background-color: var(--tertiary);
