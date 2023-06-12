@@ -121,7 +121,7 @@ var displayWeather = function(data) {
 }
 
 var displayForecast = function(data) {
-    // console.log("this is the forecast", data)
+    console.log("this is the forecast", data)
 
     for (var i = 0; i < data.list.length; i+8) {
       var dayCard = document.createElement('div');
