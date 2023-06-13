@@ -6,22 +6,52 @@ var weatherLocation = document.querySelector('#weather-location');
 var currentWeatherEl = document.querySelector('#current-weather-container');
 var fiveDayForecastEl = document.querySelector('#five-day-forecast-container');
 
+var searches = [];
+
+var renderSearches = function() {
+  console.log("help" + searches)
+  //create buttons that call past search results
+  for (var i = 0; i < searches.length; i++) {
+    var search = searches[i];
+
+     var recentSearch = document.createElement('button');
+     recentSearch.textContent = search;
+     recentSearch.classList.add('btn', 'text-dark');
+    //  recentSearch.setAttribute('value', searches[i]);
+    //  var recentCity = recentSearch.getAttribute('value');
+
+     recentSearch.addEventListener('click', function() {
+      getGeocode(search);
+     })
+
+     previousSearches.append(recentSearch);
+  }
+}
+
+var retrieveSearches = function() {
+  var recentSearches = JSON.parse(localStorage.getItem('searches'));
+
+  if (recentSearches !== null) {
+    searches = recentSearches;
+  }
+
+  renderSearches();
+}
+
+retrieveSearches();
+
 //formsubmit function
 var formSubmit = function(event) {
   event.preventDefault();
 
   var cityName = cityInput.value.trim();
-
+  
   getGeocode(cityName);
-};
 
-//buttonclick function
-var buttonClick = function(event) {
-  var previousCity = event.target//something about getting the value from local storage
+  searches.push(cityName)
+  localStorage.setItem('searches', JSON.stringify(searches));
 
-  if (previousCity) {
-    getGeocode(previousCity);
-  }
+  retrieveSearches();
 };
 
 var getGeocode = function(cityName) {
@@ -86,6 +116,9 @@ var getForecast = function(lat, lon) {
 var displayWeather = function(data) {
     console.log("this is the weather", data)
 
+    weatherLocation.innerHTML = ""
+    currentWeatherEl.innerHTML = ""
+
       // var cityName = document.createElement('h1');
       // cityName.textContent = data.city.name;
       // weatherLocation.append(cityName);
@@ -123,7 +156,7 @@ var displayWeather = function(data) {
     currentTime.textContent = date.toLocaleDateString("en-US");
     currentWeatherEl.append(currentTime);
     
-    var iconValue = data.weather.icon;
+    var iconValue = data.weather[0].icon;
     var icon = "http://openweathermap.org/img/wn/" + iconValue + ".png"
     var weatherIcon = document.createElement('img');
     weatherIcon.setAttribute('src', icon);
@@ -146,9 +179,11 @@ var displayWeather = function(data) {
 var displayForecast = function(data) {
     console.log("this is the forecast", data)
 
+    fiveDayForecastEl.innerHTML = ""
+
     for (var i = 0; i < data.list.length; i = i+8) {
       var dayCard = document.createElement('div');
-      dayCard.classList.add('card')
+      dayCard.classList.add('card', 'mx-4', 'mb-5', 'border', 'border-3', 'border-primary', 'rounded-3')
       fiveDayForecastEl.append(dayCard)
 
       // var cityName = document.createElement('h1');
