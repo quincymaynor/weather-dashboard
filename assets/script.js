@@ -32,7 +32,7 @@ var getGeocode = function(cityName) {
       if (response.ok) {
           response.json()
           .then(function (data) {
-            // getWeather(data[0].lat, data[0].lon);  
+            getWeather(data[0].lat, data[0].lon);  
             getForecast(data[0].lat, data[0].lon);
           });
         } else {
@@ -44,24 +44,24 @@ var getGeocode = function(cityName) {
     }); 
 }
 
-// var getWeather = function(lat, lon) {
-//   var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=e6aa9334d4eabc66f4fb68aff872a208&units=imperial';
+var getWeather = function(lat, lon) {
+  var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=e6aa9334d4eabc66f4fb68aff872a208&units=imperial';
 
-//   fetch(weatherUrl)
-//   .then(function (response) {
-//       if (response.ok) {
-//           response.json()
-//           .then(function (data) {
-//             displayWeather(data);
-//           });
-//         } else {
-//           alert('Error: ' + response.statusText);
-//         }
-//       })
-//   .catch(function (error) {
-//     // alert user that weather data can't be found;
-//   })
-// }
+  fetch(weatherUrl)
+  .then(function (response) {
+      if (response.ok) {
+          response.json()
+          .then(function (data) {
+            displayWeather(data);
+          });
+        } else {
+          alert('Error: ' + response.statusText);
+        }
+      })
+  .catch(function (error) {
+    // alert user that weather data can't be found;
+  })
+}
 
 var getForecast = function(lat, lon) {
   var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=e6aa9334d4eabc66f4fb68aff872a208&units=imperial';
@@ -71,7 +71,7 @@ var getForecast = function(lat, lon) {
       if (response.ok) {
         response.json()
         .then(function (data) {
-          displayWeather(data);
+          // displayWeather(data);
           displayForecast(data);
         });
       } else {
@@ -86,61 +86,61 @@ var getForecast = function(lat, lon) {
 var displayWeather = function(data) {
     console.log("this is the weather", data)
 
-      var cityName = document.createElement('h1');
-      cityName.textContent = data.city.name;
-      weatherLocation.append(cityName);
+      // var cityName = document.createElement('h1');
+      // cityName.textContent = data.city.name;
+      // weatherLocation.append(cityName);
             
-      var currentTime = document.createElement('h3');
-      currentTime.textContent = data.list[0].dt_txt;
-      currentWeatherEl.append(currentTime);
+      // var currentTime = document.createElement('h3');
+      // currentTime.textContent = data.list[0].dt_txt;
+      // currentWeatherEl.append(currentTime);
             
-      var iconValue = data.list[0].weather[0].icon;
-      var icon = "http://openweathermap.org/img/wn/" + iconValue + ".png"
-      var weatherIcon = document.createElement('img');
-      weatherIcon.setAttribute('src', icon);
-      weatherIcon.classList.add('icon-size');
-      currentWeatherEl.append(weatherIcon);
+      // var iconValue = data.list[0].weather[0].icon;
+      // var icon = "http://openweathermap.org/img/wn/" + iconValue + ".png"
+      // var weatherIcon = document.createElement('img');
+      // weatherIcon.setAttribute('src', icon);
+      // weatherIcon.classList.add('icon-size');
+      // currentWeatherEl.append(weatherIcon);
         
-      var currentTemp = document.createElement('p');
-      currentTemp.textContent = "The current temperature is: " + data.list[0].main.temp;
-      currentWeatherEl.append(currentTemp);
+      // var currentTemp = document.createElement('p');
+      // currentTemp.textContent = "The current temperature is: " + data.list[0].main.temp;
+      // currentWeatherEl.append(currentTemp);
         
-      var currentHumid = document.createElement('p');
-      currentHumid.textContent = "The current humidity is: " + data.list[0].main.humidity + '%';
-      currentWeatherEl.append(currentHumid);
+      // var currentHumid = document.createElement('p');
+      // currentHumid.textContent = "The current humidity is: " + data.list[0].main.humidity + '%';
+      // currentWeatherEl.append(currentHumid);
         
-      var currentWind = document.createElement('p');
-      currentWind.textContent = "The current windspeed is: " + data.list[0].wind.speed;
-      currentWeatherEl.append(currentWind);
+      // var currentWind = document.createElement('p');
+      // currentWind.textContent = "The current windspeed is: " + data.list[0].wind.speed;
+      // currentWeatherEl.append(currentWind);
 
-    // var cityName = document.createElement('h1');
-    // cityName.textContent = data.name;
-    // weatherLocation.append(cityName);
+    var cityName = document.createElement('h1');
+    cityName.textContent = data.name;
+    weatherLocation.append(cityName);
     
-    // var currentTime = document.createElement('h3');
-    // var unixTime = data.dt;
-    // var date = new Date(unixTime * 1000);
-    // currentTime.textContent = date.toLocaleDateString("en-US");
-    // currentWeatherEl.append(currentTime);
+    var currentTime = document.createElement('h3');
+    var unixTime = data.dt;
+    var date = new Date(unixTime * 1000);
+    currentTime.textContent = date.toLocaleDateString("en-US");
+    currentWeatherEl.append(currentTime);
     
-    // var iconValue = data.weather.icon;
-    // var icon = "http://openweathermap.org/img/wn/" + iconValue + ".png"
-    // var weatherIcon = document.createElement('img');
-    // weatherIcon.setAttribute('src', icon);
-    // weatherIcon.classList.add('icon-size');
-    // currentWeatherEl.append(weatherIcon);
+    var iconValue = data.weather.icon;
+    var icon = "http://openweathermap.org/img/wn/" + iconValue + ".png"
+    var weatherIcon = document.createElement('img');
+    weatherIcon.setAttribute('src', icon);
+    weatherIcon.classList.add('icon-size');
+    currentWeatherEl.append(weatherIcon);
 
-    // var currentTemp = document.createElement('p');
-    // currentTemp.textContent = "The current temperature is: " + data.main.temp;
-    // currentWeatherEl.append(currentTemp);
+    var currentTemp = document.createElement('p');
+    currentTemp.textContent = "The current temperature is: " + data.main.temp;
+    currentWeatherEl.append(currentTemp);
 
-    // var currentHumid = document.createElement('p');
-    // currentHumid.textContent = "The current humidity is: " + data.main.humidity;
-    // currentWeatherEl.append(currentHumid);
+    var currentHumid = document.createElement('p');
+    currentHumid.textContent = "The current humidity is: " + data.main.humidity;
+    currentWeatherEl.append(currentHumid);
 
-    // var currentWind = document.createElement('p');
-    // currentWind.textContent = "The current windspeed is: " + data.wind.speed;
-    // currentWeatherEl.append(currentWind);
+    var currentWind = document.createElement('p');
+    currentWind.textContent = "The current windspeed is: " + data.wind.speed;
+    currentWeatherEl.append(currentWind);
 }
 
 var displayForecast = function(data) {
